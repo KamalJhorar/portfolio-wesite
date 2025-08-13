@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kamal Jhorar — Portfolio</title>
+  <meta name="description" content="Portfolio of Kamal Jhorar — Full-stack developer." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚀</text></svg>">
+
+  <style>
+    /* ==============================================
+    Custom CSS
+    ==============================================
+    */
+    :root {
+      --bg-dark: #0a011a;
+      --bg-light: #F5F5F5;
+      --surface-dark: rgba(255, 255, 255, 0.05);
+      --surface-light: rgba(240, 240, 240, 1);
+      --border-dark: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(0, 0, 0, 0.1);
+      --text-dark: #c9d1d9;
+      --text-light: #24292e;
+      --accent: #c5b358; /* Gold accent color to match logo */
+      --card-radius: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-theme {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    /* Animated Gradient Background */
+    .animated-bg {
+      background: linear-gradient(135deg, #23074d, #000000, #4a00e0);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      filter: blur(80px) saturate(150%);
+      opacity: 0.5;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    .site-header {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(10, 1, 26, 0.7);
+      border-bottom: 1px solid var(--border-dark);
+      transition: background-color 0.3s ease;
+    }
+
+    body.light-theme .site-header {
+      background: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Logo Styling */
+    .logo-svg {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .logo-svg:hover {
+        transform: rotate(-15deg) scale(1.1);
+    }
+
+    /* General Card Styling */
+    .card {
+      border-radius: var(--card-radius);
+      background: var(--surface-dark);
+      border: 1px solid var(--border-dark);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    body.light-theme .card {
+      background: var(--surface-light);
+      border: 1px solid var(--border-light);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 2.5rem; /* Increased margin */
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      bottom: -8px;
+      left: 0;
+      background-color: var(--accent);
+      border-radius: 2px;
+    }
+    
+    /* Hero Section */
+    .hero-title .text-accent {
+      color: var(--accent);
+      text-shadow: 0 0 15px rgba(197, 179, 88, 0.5);
+    }
+    #type-subtitle {
+      min-height: 2em; /* Prevent layout shift */
+    }
+
+    /* Projects Vertical Timeline Path */
+    .projects-timeline {
+        position: relative;
+        max-width: 900px;
+        margin: auto;
+    }
+    .projects-timeline::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        background-color: var(--border-dark);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+    }
+    body.light-theme .projects-timeline::after {
+        background-color: var(--border-light);
+    }
+    .project-timeline-item {
+        padding: 1rem 2.5rem;
+        position: relative;
+        width: 50%;
+    }
+    .project-timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        right: -8px;
+        background-color: var(--accent);
+        border: 4px solid var(--bg-dark);
+        top: 25px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+    body.light-theme .project-timeline-item::after {
+        border-color: var(--bg-light);
+    }
+    .project-timeline-item.left {
+        left: 0;
+    }
+    .project-timeline-item.right {
+        left: 50%;
+    }
+    .project-timeline-item.right::after {
+        left: -8px;
+    }
+    .project-card::before { /* Arrow pointer */
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        border: medium solid var(--surface-dark);
+    }
+    body.light-theme .project-card::before {
+        border-color: medium solid var(--surface-light);
+    }
+    .project-timeline-item.left .project-card::before {
+        right: -15px;
+        border-width: 10px 0 10px 15px;
+        border-color: transparent transparent transparent var(--surface-dark);
+    }
+    body.light-theme .project-timeline-item.left .project-card::before {
+        border-color: transparent transparent transparent var(--surface-light);
+    }
+    .project-timeline-item.right .project-card::before {
+        left: -15px;
+        border-width: 10px 15px 10px 0;
+        border-color: transparent var(--surface-dark) transparent transparent;
+    }
+    body.light-theme .project-timeline-item.right .project-card::before {
+        border-color: transparent var(--surface-light) transparent transparent;
+    }
+    
+    /* Experience Section - Tabbed Interface */
+    .experience-tabs {
+        border-right: 2px solid var(--border-dark);
+    }
+    body.light-theme .experience-tabs {
+        border-right-color: var(--border-light);
+    }
+    .tab-btn {
+        position: relative;
+        opacity: 0.6;
+    }
+    .tab-btn.active {
+        color: var(--accent);
+        background-color: var(--surface-dark);
+        opacity: 1;
+    }
+    body.light-theme .tab-btn.active {
+        background-color: var(--surface-light);
+    }
+    .tab-btn.active::after {
+        content: '';
+        position: absolute;
+        right: -2px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: var(--accent);
+    }
+
+    /* Skills Grid */
+    .skill-card {
+        padding: 1.5rem;
+    }
+    .skill-chip {
+        background-color: rgba(197, 179, 88, 0.1);
+        color: var(--accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: transform 0.2s ease;
+    }
+    .skill-chip:hover {
+        transform: scale(1.05);
+    }
+
+    /* Positions of Responsibility Scrollbar */
+    #positions-container::-webkit-scrollbar {
+        height: 8px;
+    }
+    #positions-container::-webkit-scrollbar-thumb {
+        background: var(--border-dark);
+        border-radius: 4px;
+    }
+    #positions-container::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+    }
+    body.light-theme #positions-container::-webkit-scrollbar-thumb {
+        background: var(--border-light);
+    }
+
+
+    /* Contact Form */
+    .input {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      padding: 12px;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(197, 179, 88, 0.3);
+    }
+    body.light-theme .input {
+      border-color: var(--border-light);
+    }
+    body.light-theme .input:focus {
+      border-color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a011a;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+    }
+    body.light-theme .btn-outline {
+        border-color: var(--border-light);
+    }
+    .btn-outline:hover {
+        background: var(--surface-dark);
+    }
+    body.light-theme .btn-outline:hover {
+        background: var(--surface-light);
+    }
+    
+    .btn-ai {
+        background: linear-gradient(45deg, #8a2be2, #4a00e0);
+        color: white;
+    }
+    .btn-ai:hover {
+        box-shadow: 0 10px 20px rgba(74, 0, 224, 0.25);
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        background-color: var(--accent);
+        color: white;
+        border-radius: 50%;
+        display: none; /* Hidden by default */
+        place-items: center;
+        cursor: pointer;
+        z-index: 1000;
+        transition: opacity 0.3s, transform 0.3s;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    #back-to-top.show {
+        display: grid;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Modal Styling */
+    .modal-overlay {
+        background-color: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+    }
+
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+        .projects-timeline::after {
+            left: 20px;
+        }
+        .project-timeline-item {
+            width: 100%;
+            padding-left: 50px;
+            padding-right: 1rem;
+        }
+        .project-timeline-item.left, .project-timeline-item.right {
+            left: 0;
+        }
+        .project-timeline-item::after,
+        .project-timeline-item.right::after {
+            left: 12px;
+        }
+        .project-card::before,
+        .project-timeline-item.right .project-card::before {
+            left: -15px;
+            border-width: 10px 15px 10px 0;
+            border-color: transparent var(--surface-dark) transparent transparent;
+        }
+        body.light-theme .project-card::before {
+            border-color: transparent var(--surface-light) transparent transparent;
+        }
+        .experience-tabs {
+            border-right: none;
+            border-bottom: 2px solid var(--border-dark);
+            flex-direction: row;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        body.light-theme .experience-tabs {
+            border-bottom-color: var(--border-light);
+        }
+        .tab-btn {
+            white-space: nowrap;
+        }
+        .tab-btn.active::after {
+            width: 100%;
+            height: 2px;
+            top: auto;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+        }
+    }
+
+  </style>
+</head>
+<body id="page-root" class="dark-theme">
+
+  <div class="animated-bg fixed inset-0 -z-10"></div>
+  
+  <div id="api-key-modal" class="modal-overlay fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md border border-gray-700">
+        <h3 class="text-xl font-bold text-white">Enter Gemini API Key</h3>
+        <p class="text-sm text-gray-400 mt-2">To use the AI features, please provide your Google AI Studio API key. You can get one for free from <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-accent underline">Google AI Studio</a>.</p>
+        <input type="password" id="api-key-input" class="input w-full mt-4" placeholder="Enter your API key...">
+        <div class="flex justify-end gap-3 mt-4">
+            <button id="api-key-cancel" class="btn btn-outline">Cancel</button>
+            <button id="api-key-save" class="btn btn-primary">Save Key</button>
+        </div>
+    </div>
+  </div>
+  
+  <div id="emailjs-modal" class="modal-overlay fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md border border-gray-700 space-y-4">
+        <div>
+            <h3 class="text-xl font-bold text-white">Configure Email Service</h3>
+            <p class="text-sm text-gray-400 mt-2">To enable the contact form, please enter your credentials from <a href="https://emailjs.com" target="_blank" class="text-accent underline">EmailJS</a>.</p>
+        </div>
+        <input type="text" id="emailjs-service-id-input" class="input w-full" placeholder="EmailJS Service ID">
+        <input type="text" id="emailjs-template-id-input" class="input w-full" placeholder="EmailJS Template ID">
+        <input type="text" id="emailjs-public-key-input" class="input w-full" placeholder="EmailJS Public Key">
+        <div class="flex justify-end gap-3 mt-4">
+            <button id="emailjs-cancel" class="btn btn-outline">Cancel</button>
+            <button id="emailjs-save" class="btn btn-primary">Save & Activate</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="min-h-screen relative">
+
+    <header class="site-header sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-3 group">
+          <svg class="logo-svg w-12 h-12 text-accent" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 2.5C23.78 2.5 2.5 23.78 2.5 50C2.5 76.22 23.78 97.5 50 97.5C76.22 97.5 97.5 76.22 97.5 50C97.5 23.78 76.22 2.5 50 2.5Z" stroke="currentColor" stroke-width="5"/>
+            <path d="M35 30V70" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <path d="M35 50L50 30" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <path d="M35 50L50 70" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <path d="M65 30L65 70L55 70" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="text-lg font-bold">Kamal Jhorar</div>
+            <div class="text-xs opacity-80">Full-stack Developer</div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link" href="#experience">Experience</a>
+          <a class="nav-link" href="#skills">Skills</a>
+          <a class="nav-link" href="#positions-of-responsibility">Responsibility</a>
+          <a class="nav-link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-gray-800">🌙</button>
+          <a href="#contact" class="btn btn-primary hidden sm:inline-block">Hire Me</a>
+          <button id="menu-toggle" class="md:hidden p-2 rounded-md text-2xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-nav" class="md:hidden hidden fixed top-16 right-4 bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 z-50 border border-gray-700">
+      <div class="flex flex-col gap-4 text-center">
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#positions-of-responsibility">Responsibility</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-24">
+
+      <section id="home" class="fade-in">
+        <div class="grid md:grid-cols-5 gap-10 items-center">
+          <div class="md:col-span-3">
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl font-extrabold">
+              Hi, I'm <span class="text-accent">Kamal Jhorar</span>
+            </h1>
+            <p id="type-subtitle" class="mt-4 text-lg md:text-xl opacity-80 max-w-2xl"></p>
+            <div class="mt-8 flex flex-wrap gap-4 items-center">
+              <a href="#projects" class="btn btn-primary">View My Work</a>
+              <a href="kamal_jhorar_resume3.pdf" target="_blank" class="btn btn-outline">Download CV</a>
+            </div>
+            <div class="mt-8 flex gap-5 text-2xl" id="social-links"></div>
+          </div>
+          <div class="md:col-span-2 flex justify-center md:justify-end">
+            <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-accent/50 shadow-2xl shadow-accent/20">
+              <img id="profile-img" src="IMG.jpg" alt="Kamal Jhorar" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="fade-in">
+        <h2 class="section-title text-center">My Projects</h2>
+        <div id="projects-timeline" class="projects-timeline"></div>
+      </section>
+
+      <section id="experience" class="fade-in">
+        <h2 class="section-title">Work Experience</h2>
+        <div id="experience-section" class="min-h-[300px]"></div>
+      </section>
+
+      <section id="skills" class="fade-in">
+        <h2 class="section-title">My Skillset</h2>
+        <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+      </section>
+
+      <section id="positions-of-responsibility" class="fade-in">
+        <h2 class="section-title">Positions of Responsibility</h2>
+        <div id="positions-container" class="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4">
+            </div>
+      </section>
+
+      <section id="contact" class="fade-in">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="flex flex-col justify-center">
+            <h3 class="text-2xl font-bold">Let's build something great!</h3>
+            <p class="opacity-80 mt-2 max-w-md">I'm currently available for freelance projects and full-time roles. If you have an idea, a project, or just want to say hi, feel free to reach out.</p>
+            <div class="mt-6 space-y-4">
+              <a id="contact-email-link" href="#" class="flex items-center gap-3 text-lg group">
+                <i class="fas fa-envelope text-accent"></i>
+                <span id="contact-email" class="group-hover:text-accent transition-colors"></span>
+              </a>
+              <div class="flex items-center gap-3 text-lg">
+                <i class="fas fa-map-marker-alt text-accent"></i>
+                <span id="contact-location"></span>
+              </div>
+            </div>
+          </div>
+          <div class="card p-6 sm:p-8">
+            <form id="contact-form" class="space-y-4">
+              <input id="from_name" name="from_name" type="text" placeholder="Your Name" required class="input w-full">
+              <input id="reply_to" name="reply_to" type="email" placeholder="Your Email" required class="input w-full">
+              <textarea id="message" name="message" rows="5" placeholder="Your Message" required class="input w-full"></textarea>
+              <div class="flex items-center justify-between flex-wrap gap-4">
+                <button type="submit" id="submit-btn" class="btn btn-primary">
+                  <span>Send Message</span>
+                  <i class="fas fa-paper-plane ml-2"></i>
+                </button>
+                <button type="button" id="contact-helper-btn" class="btn btn-ai text-sm hidden">✨ Help Me Write</button>
+              </div>
+               <div id="form-status" class="text-sm opacity-80 mt-2"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="py-8 text-center text-sm opacity-60 border-t border-gray-800">
+      <p>&copy; <span id="year"></span> Kamal Jhorar. All rights reserved.</p>
+      <p class="mt-1">Designed & Built with <i class="fas fa-heart text-red-500"></i></p>
+    </footer>
+
+  </div>
+
+  <button id="back-to-top" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+<script>
+  /* ==============================================
+  Resume Data
+  ==============================================
+  */
+  window.resumeData = {
+    name: "Kamal Jhorar",
+    title: "Full-stack Developer",
+    location: "Bhopal, Madhya Pradesh",
+    email: "kamaljhorar134@gmail.com",
+    phone: "+91 98758 21128",
+    profileImage: "IMG.jpg",
+    links: {
+      linkedin: "https://linkedin.com/in/kamaljhorar",
+      github: "https://github.com/kamaljhorar",
+      twitter: "https://www.instagram.com/kamaljhorar1709?igsh=MWIwMG5vd2JudzBxNw=="
+    },
+    summary: "A passionate B.Tech student from MANIT Bhopal, specializing in building high-performance web applications with the MERN stack and crafting delightful user experiences.",
+    projects: [
+      {
+        title: "Travel Mate",
+        description: "Full-stack hotel booking platform with features like property listings, image uploads, secure authentication, and a user-friendly interface.",
+        tech: ["MongoDB", "Express", "React", "Node", "Redux", "Tailwind"],
+        liveDemo: "https://wanderlust-yt4q.onrender.com/listing",
+        repo: "https://github.com/KamalJhorar/travel-mate"
+      },
+      {
+        title: "Retail Sales EDA",
+        description: "In-depth exploratory data analysis of over 10,000 retail transactions to uncover sales trends, seasonality, and customer behavior patterns.",
+        tech: ["Python", "Pandas", "Matplotlib", "Jupyter"],
+        liveDemo: "https://github.com/KamalJhorar/retail_sales_analysis_EDA",
+        repo: "https://github.com/KamalJhorar/retail_sales_analysis_EDA"
+      },
+      {
+        title: "Razorpay UI Clone",
+        description: "A pixel-perfect, responsive clone of the Razorpay homepage, focusing on advanced CSS techniques with Tailwind CSS.",
+        tech: ["HTML5", "Tailwind CSS", "JavaScript"],
+        liveDemo: "https://kamaljhorar.github.io/razor-pay-clone/",
+        repo: "https://github.com/KamalJhorar/razor-pay-clone/"
+      }
+    ],
+    experience: [
+      {
+        company: "Skillbit Technologies",
+        role: "Web Development Intern",
+        period: "May 2025 – Jun 2025",
+        bullets: [
+          "Developed and maintained responsive front-end interfaces using React and Tailwind CSS.",
+          "Engineered robust RESTful APIs with Node.js and Express for backend services.",
+          "Designed and managed MongoDB database schemas for optimal performance.",
+          "Implemented JWT-based authentication for secure user access."
+        ]
+      }
+    ],
+    skills: {
+      "Frontend": ["HTML5", "CSS3", "JavaScript (ES6+)", "React", "Redux", "Tailwind CSS"],
+      "Backend": ["Node.js", "Express.js", "REST APIs", "Python"],
+      "Databases": ["MongoDB", "MySQL", "PostgreSQL"],
+      "Tools & DevOps": ["Git", "GitHub", "Docker", "Postman", "VS Code", "Render"]
+    },
+    positions: [
+        {
+            organization: "National Cadet Corps (12 MP BN NCC)",
+            role: "Sergeant",
+            period: "Jan 2023 - Mar 2025",
+            description: "Led cadet groups and organized training activities, fostering discipline and teamwork.",
+            icon: "fas fa-shield-halved"
+        },
+        {
+            organization: "FiNIT – MANIT Finance Society",
+            role: "Executive Head & Co-Founder",
+            period: "Aug 2024 - Present",
+            description: "Established and led the campus finance society to promote financial literacy among students.",
+            icon: "fas fa-chart-line"
+        }
+    ]
+  };
+</script>
+
+<script>
+  /* ==============================================
+  Main Application Logic
+  ==============================================
+  */
+  (() => {
+      // --- HARDCODED API CREDENTIALS ---
+      const hardcodedEmailJsConfig = {
+          serviceId: 'kamaljhorar',       // <-- YOUR EMAILJS SERVICE ID
+          templateId: 'template_i8ihj55',  // <-- YOUR EMAILJS TEMPLATE ID
+          publicKey: 'YLiiO3qKBO1T3KO-G'       // <-- YOUR EMAILJS PUBLIC KEY
+      };
+
+      const hardcodedGeminiApiKey = 'YOUR_GEMINI_API_KEY_HERE'; // <-- PASTE YOUR GEMINI API KEY HERE
+
+      // --- UTILITY FUNCTIONS ---
+      const $ = sel => document.querySelector(sel);
+      const $$ = sel => Array.from(document.querySelectorAll(sel));
+      const create = (tag, props = {}) => {
+          const el = document.createElement(tag);
+          Object.entries(props).forEach(([key, value]) => {
+              if (key === 'cls') el.className = value;
+              else if (key === 'text') el.textContent = value;
+              else if (key === 'html') el.innerHTML = value;
+              else el.setAttribute(key, value);
+          });
+          return el;
+      };
+
+      // --- GEMINI API INTEGRATION (MODIFIED) ---
+      async function callGemini(prompt, buttonToUpdate) {
+          if (!hardcodedGeminiApiKey || hardcodedGeminiApiKey === 'YOUR_GEMINI_API_KEY_HERE') {
+              alert('The Gemini API key is not configured.');
+              return null;
+          }
+
+          const geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${hardcodedGeminiApiKey}`;
+          const originalButtonText = buttonToUpdate.innerHTML;
+          buttonToUpdate.disabled = true;
+          buttonToUpdate.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Thinking...`;
+          
+          try {
+              const response = await fetch(geminiApiUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
+              });
+
+              if (!response.ok) throw new Error(`API responded with status: ${response.status}`);
+              
+              const data = await response.json();
+              if (data.candidates && data.candidates.length > 0) {
+                  return data.candidates[0].content.parts[0].text;
+              }
+              return "Sorry, I couldn't generate a response.";
+          } catch (error) {
+              console.error("Error calling Gemini API:", error);
+              return "An error occurred. Please check the console.";
+          } finally {
+              buttonToUpdate.disabled = false;
+              buttonToUpdate.innerHTML = originalButtonText;
+          }
+      }
+
+      // --- RENDER FUNCTIONS ---
+      const renderSocialLinks = (links = {}) => {
+          const container = $('#social-links');
+          container.innerHTML = '';
+          const iconMap = {
+              linkedin: 'fa-brands fa-linkedin',
+              github: 'fa-brands fa-github',
+              twitter: 'fa-brands fa-instagram',
+          };
+          Object.entries(links).forEach(([key, url]) => {
+              if (!url) return;
+              const iconClass = iconMap[key] || 'fas fa-link';
+              const link = create('a', {
+                  href: url,
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  'aria-label': key,
+                  cls: 'hover:text-accent transition-colors duration-300 hover:scale-110'
+              });
+              link.innerHTML = `<i class="${iconClass}"></i>`;
+              container.appendChild(link);
+          });
+      };
+
+      const renderProjects = (projects = []) => {
+          const timeline = $('#projects-timeline');
+          timeline.innerHTML = '';
+          projects.forEach((p, index) => {
+              const side = index % 2 === 0 ? 'left' : 'right';
+              const item = create('div', { cls: `project-timeline-item ${side}` });
+              const card = create('div', { cls: 'project-card card' });
+              const content = `
+            <div class="p-6 flex-grow">
+              <h3 class="text-xl font-bold">${p.title}</h3>
+              <p class="mt-2 text-sm opacity-80 flex-grow">${p.description}</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                ${p.tech.map(t => `<span class="skill-chip text-xs">${t}</span>`).join('')}
+              </div>
+            </div>
+            <div class="p-6 bg-black/20 border-t border-white/10 flex items-center gap-4">
+              ${p.liveDemo ? `<a href="${p.liveDemo}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm hover:text-accent transition-colors">Live Demo <i class="fas fa-external-link-alt ml-1"></i></a>` : ''}
+              ${p.repo ? `<a href="${p.repo}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm hover:text-accent transition-colors">GitHub Repo <i class="fab fa-github ml-1"></i></a>` : ''}
+            </div>
+          `;
+              card.innerHTML = content;
+              item.appendChild(card);
+              timeline.appendChild(item);
+          });
+      };
+
+      const renderExperience = (experience = []) => {
+          const container = $('#experience-section');
+          container.innerHTML = '';
+          if (!experience || experience.length === 0) return;
+          const wrapper = create('div', { cls: 'md:flex' });
+          const tabsContainer = create('div', { cls: 'experience-tabs flex md:flex-col md:w-1/4' });
+          const contentContainer = create('div', { cls: 'md:w-3/4 md:pl-8 py-4' });
+          experience.forEach((exp, index) => {
+              const tabId = `exp-tab-${index}`;
+              const contentId = `exp-content-${index}`;
+              const tabBtn = create('button', {
+                  cls: `tab-btn text-left p-3 rounded-md w-full font-semibold transition-all duration-200 ${index === 0 ? 'active' : ''}`,
+                  'data-target': `#${contentId}`
+              });
+              tabBtn.innerHTML = exp.company;
+              tabsContainer.appendChild(tabBtn);
+              const contentPanel = create('div', {
+                  id: contentId,
+                  cls: `tab-content ${index === 0 ? '' : 'hidden'}`
+              });
+              contentPanel.innerHTML = `
+            <h3 class="text-xl font-bold">${exp.role} <span class="text-accent">@ ${exp.company}</span></h3>
+            <p class="text-sm opacity-70 mt-1 mb-4">${exp.period}</p>
+            <ul class="list-disc list-inside space-y-2 text-sm opacity-90">
+              ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
+            </ul>
+          `;
+              contentContainer.appendChild(contentPanel);
+          });
+          wrapper.appendChild(tabsContainer);
+          wrapper.appendChild(contentContainer);
+          container.appendChild(wrapper);
+      };
+
+      const renderSkills = (skills = {}) => {
+          const grid = $('#skills-grid');
+          grid.innerHTML = '';
+          Object.entries(skills).forEach(([category, skillList]) => {
+              const card = create('div', { cls: 'skill-card card p-6' });
+              const content = `
+            <h3 class="text-xl font-bold mb-4">${category}</h3>
+            <div class="flex flex-wrap gap-2">
+              ${skillList.map(s => `<span class="skill-chip">${s}</span>`).join('')}
+            </div>
+          `;
+              card.innerHTML = content;
+              grid.appendChild(card);
+          });
+      };
+
+      const renderPositions = (positions = []) => {
+        const container = $('#positions-container');
+        if (!container) return;
+        container.innerHTML = '';
+        positions.forEach(pos => {
+            const card = create('div', {
+                cls: 'card p-6 flex-shrink-0 w-[300px] md:w-[340px] flex flex-col items-start space-y-3 hover:!border-accent'
+            });
+            const content = `
+                <div class="text-3xl text-accent/80">
+                    <i class="${pos.icon}"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold">${pos.role}</h3>
+                    <p class="font-semibold opacity-90">${pos.organization}</p>
+                </div>
+                <p class="text-xs opacity-70 bg-white/10 dark:bg-black/10 px-2 py-1 rounded-full">${pos.period}</p>
+                <p class="text-sm opacity-80 flex-grow">${pos.description}</p>
+            `;
+            card.innerHTML = content;
+            container.appendChild(card);
+        });
+      };
+
+      const renderContactInfo = (data = {}) => {
+          if (data.email) {
+              $('#contact-email').textContent = data.email;
+              $('#contact-email-link').href = `mailto:${data.email}`;
+          }
+          if (data.location) $('#contact-location').textContent = data.location;
+          if (data.profileImage) $('#profile-img').src = data.profileImage;
+      };
+
+      // --- ANIMATIONS & INTERACTIONS ---
+      let typewriterInterval;
+      const initTypewriter = (node, texts, speed = 50, pause = 2000) => {
+          if (!node) return;
+          clearInterval(typewriterInterval);
+          let textIndex = 0,
+              charIndex = 0,
+              isDeleting = false;
+          const tick = () => {
+              const currentText = texts[textIndex];
+              if (isDeleting) {
+                  charIndex--;
+              } else {
+                  charIndex++;
+              }
+              node.textContent = currentText.substring(0, charIndex);
+              if (!isDeleting && charIndex === currentText.length) {
+                  setTimeout(() => isDeleting = true, pause);
+              } else if (isDeleting && charIndex === 0) {
+                  isDeleting = false;
+                  textIndex = (textIndex + 1) % texts.length;
+              }
+          };
+          typewriterInterval = setInterval(tick, speed);
+      };
+
+      const initIntersectionObserver = () => {
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      entry.target.classList.add('visible');
+                      observer.unobserve(entry.target);
+                  }
+              });
+          }, { threshold: 0.1 });
+          $$('.fade-in').forEach(el => observer.observe(el));
+      };
+
+      const initThemeToggle = () => {
+          const btn = $('#theme-toggle');
+          const body = $('body');
+          const applyTheme = (theme) => {
+              if (theme === 'light') {
+                  body.classList.add('light-theme');
+                  body.classList.remove('dark-theme');
+                  btn.innerHTML = '☀️';
+              } else {
+                  body.classList.remove('light-theme');
+                  body.classList.add('dark-theme');
+                  btn.innerHTML = '🌙';
+              }
+          };
+          const storedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+          applyTheme(storedTheme);
+          btn.addEventListener('click', () => {
+              const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
+              localStorage.setItem('portfolio-theme', newTheme);
+              applyTheme(newTheme);
+          });
+      };
+
+      const initContactForm = () => {
+          const form = $('#contact-form');
+          const statusDiv = $('#form-status');
+          const submitBtn = $('#submit-btn');
+          const helperBtn = $('#contact-helper-btn');
+          const messageTextarea = $('#message');
+
+          messageTextarea.addEventListener('input', () => {
+              if (messageTextarea.value.trim().length > 5) {
+                  helperBtn.classList.remove('hidden');
+              } else {
+                  helperBtn.classList.add('hidden');
+              }
+          });
+
+          helperBtn.addEventListener('click', async () => {
+              const currentMessage = messageTextarea.value;
+              const prompt = `A person is writing a message to me (Kamal, a full-stack developer) on my portfolio contact form. Their current draft is: "${currentMessage}". Please improve this message to be more professional, clear, and concise, while keeping the original intent. The response should only be the improved message text.`;
+              const improvedMessage = await callGemini(prompt, helperBtn);
+              if (improvedMessage) {
+                  messageTextarea.value = improvedMessage;
+              }
+          });
+
+          form.addEventListener('submit', (e) => {
+              e.preventDefault();
+              submitBtn.disabled = true;
+              submitBtn.innerHTML = `<span>Sending...</span><i class="fas fa-spinner fa-spin ml-2"></i>`;
+              statusDiv.textContent = '';
+
+              emailjs.sendForm(hardcodedEmailJsConfig.serviceId, hardcodedEmailJsConfig.templateId, form, hardcodedEmailJsConfig.publicKey)
+                  .then(() => {
+                      statusDiv.textContent = 'Message sent successfully!';
+                      statusDiv.classList.add('text-green-400');
+                      form.reset();
+                      helperBtn.classList.add('hidden');
+                  }, (error) => {
+                      console.error('EmailJS Error:', error);
+                      statusDiv.textContent = 'Failed to send. Check console for details.';
+                      statusDiv.classList.add('text-red-400');
+                  })
+                  .finally(() => {
+                      submitBtn.disabled = false;
+                      submitBtn.innerHTML = `<span>Send Message</span><i class="fas fa-paper-plane ml-2"></i>`;
+                      setTimeout(() => {
+                          statusDiv.textContent = '';
+                          statusDiv.classList.remove('text-green-400', 'text-red-400');
+                      }, 5000);
+                  });
+          });
+      };
+
+      const initExperienceTabs = () => {
+          const tabsContainer = $('.experience-tabs');
+          if (!tabsContainer) return;
+          tabsContainer.addEventListener('click', (e) => {
+              const clickedTab = e.target.closest('.tab-btn');
+              if (!clickedTab) return;
+              tabsContainer.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+              const contentContainer = tabsContainer.nextElementSibling;
+              contentContainer.querySelectorAll('.tab-content').forEach(panel => panel.classList.add('hidden'));
+              clickedTab.classList.add('active');
+              const targetId = clickedTab.dataset.target;
+              $(targetId).classList.remove('hidden');
+          });
+      };
+
+      const initMobileMenu = () => {
+          const btn = $('#menu-toggle');
+          const nav = $('#mobile-nav');
+          btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              nav.classList.toggle('hidden');
+          });
+          document.addEventListener('click', (e) => {
+              if (!nav.contains(e.target) && !btn.contains(e.target)) {
+                  nav.classList.add('hidden');
+              }
+          });
+      };
+
+      const initBackToTop = () => {
+          const btn = $('#back-to-top');
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > 300) {
+                  btn.classList.add('show');
+              } else {
+                  btn.classList.remove('show');
+              }
+          });
+          btn.addEventListener('click', () => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+      };
+      
+      const initActiveNavLinks = () => {
+          const sections = $$('section[id]');
+          const navLinks = $$('.nav-link');
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      const id = entry.target.getAttribute('id');
+                      navLinks.forEach(link => {
+                          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                      });
+                  }
+              });
+          }, { rootMargin: '-50% 0px -50% 0px' });
+          sections.forEach(section => observer.observe(section));
+      };
+
+      // --- APP INITIALIZATION ---
+      const initApp = () => {
+          const data = window.resumeData || {};
+          renderSocialLinks(data.links);
+          renderProjects(data.projects);
+          renderExperience(data.experience);
+          renderSkills(data.skills);
+          renderPositions(data.positions);
+          renderContactInfo(data);
+          $('#year').textContent = new Date().getFullYear();
+          initTypewriter($('#type-subtitle'), [
+              data.summary || 'Building responsive web apps with delightful UX.',
+              'MERN Stack Specialist.',
+              'React • Node.js • MongoDB'
+          ]);
+          initIntersectionObserver();
+          initThemeToggle();
+          initContactForm();
+          initMobileMenu();
+          initBackToTop();
+          initActiveNavLinks();
+          
+          // Remove the reset button as it's no longer needed
+          const resetBtn = $('#reset-keys-btn');
+          if (resetBtn) resetBtn.remove();
+      };
+
+      document.addEventListener('DOMContentLoaded', initApp);
+  })();
+</script>
+</body>
+</html>
